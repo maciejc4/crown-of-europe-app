@@ -1,0 +1,221 @@
+<div class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-container">
+    <button class="close-btn" (click)="onClose()">
+      <span class="material-icons">close</span>
+    </button>
+
+    <div class="modal-header">
+      <span class="material-icons header-icon">analytics</span>
+      <h2>Your Statistics</h2>
+    </div>
+
+    <div class="modal-content">
+      @if (climbedMountains().length === 0) {
+        <div class="empty-state">
+          <span class="material-icons">hiking</span>
+          <p>You haven't climbed any peaks yet</p>
+          <span class="hint">Mark peaks as climbed to see your statistics</span>
+        </div>
+      } @else {
+        <!-- Progress Ring Section -->
+        <div class="progress-section">
+          <div class="progress-ring-large">
+            <svg viewBox="0 0 100 100">
+              <circle class="progress-bg" cx="50" cy="50" r="45" />
+              <circle class="progress-fill" cx="50" cy="50" r="45" 
+                      [style.stroke-dasharray]="(completionPercentage() * 2.83) + ', 283'" />
+            </svg>
+            <div class="progress-center">
+              <span class="progress-value">{{ completionPercentage() }}%</span>
+              <span class="progress-label">completed</span>
+            </div>
+          </div>
+          <div class="progress-info">
+            <div class="progress-stat">
+              <span class="stat-big">{{ climbedMountains().length }}</span>
+              <span class="stat-label">of {{ allMountains().length }} peaks</span>
+            </div>
+            <div class="time-estimate">
+              <span class="material-icons">schedule</span>
+              <span>Estimated time to complete: {{ estimatedTimeToComplete() }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="material-icons">height</span>
+            <div class="stat-info">
+              <span class="stat-value">{{ totalHeight() | number }}</span>
+              <span class="stat-label">Total height (m)</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <span class="material-icons">show_chart</span>
+            <div class="stat-info">
+              <span class="stat-value">{{ averageHeight() | number }}</span>
+              <span class="stat-label">Average height (m)</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <span class="material-icons">swap_vert</span>
+            <div class="stat-info">
+              <span class="stat-value">{{ heightRange() | number }}</span>
+              <span class="stat-label">Height range (m)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Highest/Lowest -->
+        <div class="extremes-section">
+          <h3>
+            <span class="material-icons">emoji_events</span>
+            Records
+          </h3>
+          <div class="extremes-grid">
+            @if (highestClimbed()) {
+              <div class="extreme-card highest">
+                <span class="material-icons">arrow_upward</span>
+                <div class="extreme-info">
+                  <span class="extreme-name">{{ highestClimbed()!.name }}</span>
+                  <span class="extreme-height">{{ highestClimbed()!.height }} m</span>
+                  <span class="extreme-label">Highest climbed</span>
+                </div>
+              </div>
+            }
+            @if (lowestClimbed()) {
+              <div class="extreme-card lowest">
+                <span class="material-icons">arrow_downward</span>
+                <div class="extreme-info">
+                  <span class="extreme-name">{{ lowestClimbed()!.name }}</span>
+                  <span class="extreme-height">{{ lowestClimbed()!.height }} m</span>
+                  <span class="extreme-label">Lowest climbed</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Difficulty Progress -->
+        <div class="difficulty-section">
+          <h3>
+            <span class="material-icons">fitness_center</span>
+            Progress by Difficulty
+          </h3>
+          <div class="difficulty-bars">
+            <div class="difficulty-row">
+              <span class="difficulty-label easy">
+                <span class="material-icons">sentiment_satisfied</span>
+                Easy
+              </span>
+              <div class="progress-bar-container">
+                <div class="progress-bar easy" 
+                     [style.width.%]="difficultyStats().easy.total > 0 ? (difficultyStats().easy.climbed / difficultyStats().easy.total * 100) : 0">
+                </div>
+              </div>
+              <span class="difficulty-count">{{ difficultyStats().easy.climbed }}/{{ difficultyStats().easy.total }}</span>
+            </div>
+            <div class="difficulty-row">
+              <span class="difficulty-label medium">
+                <span class="material-icons">sentiment_neutral</span>
+                Medium
+              </span>
+              <div class="progress-bar-container">
+                <div class="progress-bar medium" 
+                     [style.width.%]="difficultyStats().medium.total > 0 ? (difficultyStats().medium.climbed / difficultyStats().medium.total * 100) : 0">
+                </div>
+              </div>
+              <span class="difficulty-count">{{ difficultyStats().medium.climbed }}/{{ difficultyStats().medium.total }}</span>
+            </div>
+            <div class="difficulty-row">
+              <span class="difficulty-label hard">
+                <span class="material-icons">sentiment_very_dissatisfied</span>
+                Hard
+              </span>
+              <div class="progress-bar-container">
+                <div class="progress-bar hard" 
+                     [style.width.%]="difficultyStats().hard.total > 0 ? (difficultyStats().hard.climbed / difficultyStats().hard.total * 100) : 0">
+                </div>
+              </div>
+              <span class="difficulty-count">{{ difficultyStats().hard.climbed }}/{{ difficultyStats().hard.total }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next Recommendations -->
+        @if (nextToClimb().length > 0) {
+          <div class="recommendations-section">
+            <h3>
+              <span class="material-icons">lightbulb</span>
+              Suggested Next Goals
+            </h3>
+            <div class="recommendations-list">
+              @for (mountain of nextToClimb(); track mountain.id) {
+                <div class="recommendation-card">
+                  <div class="rec-info">
+                    <span class="rec-name">{{ mountain.name }}</span>
+                    <span class="rec-details">{{ mountain.height }} m • {{ mountain.country }}</span>
+                  </div>
+                  <span class="rec-difficulty" [class]="'diff-' + mountain.difficulty">
+                    {{ mountain.difficulty }}
+                  </span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Completed Countries -->
+        @if (completedCountries().length > 0) {
+          <div class="completed-section">
+            <h3>
+              <span class="material-icons">workspace_premium</span>
+              Completed Countries
+            </h3>
+            <div class="completed-badges">
+              @for (country of completedCountries(); track country.name) {
+                <span class="completed-badge">
+                  <span class="material-icons">check_circle</span>
+                  {{ country.name }}
+                </span>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Country Progress -->
+        <div class="regions-section">
+          <h3>
+            <span class="material-icons">place</span>
+            Progress by Country
+          </h3>
+          <div class="regions-list">
+            @for (country of countryStats(); track country.name) {
+              <div class="region-row" [class.completed]="country.climbed === country.total">
+                <div class="region-info">
+                  <span class="region-name">{{ country.name }}</span>
+                  @if (country.climbed === country.total) {
+                    <span class="material-icons completed-icon">verified</span>
+                  }
+                </div>
+                <div class="region-progress">
+                  <div class="mini-progress-bar">
+                    <div class="mini-progress-fill" 
+                         [style.width.%]="country.percentage"
+                         [class.complete]="country.climbed === country.total">
+                    </div>
+                  </div>
+                  <span class="region-count">{{ country.climbed }}/{{ country.total }}</span>
+                  <span class="region-percent">({{ country.percentage }}%)</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-container">
+    <!-- Header -->
+    <header class="modal-header">
+      <div class="header-content">
+        <h2>{{ mountain.name }}</h2>
+        <div class="header-badges">
+          <span class="height-badge">
+            <span class="material-icons">height</span>
+            {{ mountain.height }} m
+          </span>
+          <span class="region-badge">{{ mountain.country }}</span>
+        </div>
+      </div>
+      <button class="close-btn" (click)="onClose()" aria-label="Close">
+        <span class="material-icons">close</span>
+      </button>
+    </header>
+
+    <!-- Content -->
+    <div class="modal-content">
+      <!-- Image Section -->
+      <section class="image-section">
+        <img [src]="mountain.details.imageUrl" [alt]="mountain.name" loading="lazy" />
+        <span class="image-attribution">{{ mountain.details.imageAttribution }}</span>
+        <button 
+          class="climbed-overlay-btn" 
+          [class.is-climbed]="mountain.climbed"
+          (click)="onToggleClimbed()"
+        >
+          <span class="material-icons">{{ mountain.climbed ? 'check_circle' : 'radio_button_unchecked' }}</span>
+          {{ mountain.climbed ? 'Climbed!' : 'Mark as climbed' }}
+        </button>
+      </section>
+
+      <!-- Weather Section -->
+      <section class="weather-section">
+        <h3>
+          <span class="material-icons">cloud</span>
+          Current Weather
+        </h3>
+        @if (weatherLoading()) {
+          <div class="weather-loading">
+            <span class="material-icons spinning">sync</span>
+            <span>Loading...</span>
+          </div>
+        } @else if (weather()) {
+          <div class="weather-card">
+            <div class="weather-main">
+              <span class="material-icons weather-icon">{{ weather()!.icon }}</span>
+              <div class="weather-temp">
+                <span class="temp-value">{{ weather()!.temperature }}°C</span>
+                <span class="weather-desc">{{ weather()!.description }}</span>
+              </div>
+            </div>
+            <div class="weather-details">
+              <div class="weather-detail">
+                <span class="material-icons">air</span>
+                <span>{{ weather()!.windSpeed }} km/h</span>
+              </div>
+              <div class="weather-detail">
+                <span class="material-icons">water_drop</span>
+                <span>{{ weather()!.humidity }}%</span>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div class="weather-error">
+            <span class="material-icons">cloud_off</span>
+            <span>Could not load weather data</span>
+          </div>
+        }
+      </section>
+
+      <!-- Info Grid -->
+      <div class="info-grid">
+        <!-- Description -->
+        <section class="description-section">
+          <h3>
+            <span class="material-icons">info</span>
+            Description
+          </h3>
+          <p>{{ mountain.details.description }}</p>
+        </section>
+
+        <!-- Map -->
+        <section class="map-section">
+          <h3>
+            <span class="material-icons">map</span>
+            Location
+          </h3>
+          <div class="map-container" #mapContainer></div>
+          <div class="map-buttons">
+            <button class="map-btn mapy-cz" (click)="openInMapyCz()">
+              <span class="material-icons">hiking</span>
+              Mapy.cz (hiking)
+            </button>
+            <button class="map-btn osm" (click)="openInOSM()">
+              <span class="material-icons">map</span>
+              OpenStreetMap
+            </button>
+          </div>
+        </section>
+
+        <!-- Trails -->
+        <section class="trails-section">
+          <h3>
+            <span class="material-icons">hiking</span>
+            Hiking Trails
+          </h3>
+          <div class="trails-list">
+            @for (trail of mountain.details.trails; track trail.name) {
+              <div class="trail-card">
+                <div class="trail-header">
+                  <span class="trail-name">{{ trail.name }}</span>
+                  <span class="trail-difficulty" [class]="getTrailDifficultyClass(trail.difficulty)">
+                    {{ trail.difficulty }}
+                  </span>
+                </div>
+                <div class="trail-info">
+                  <span class="trail-stat">
+                    <span class="material-icons">straighten</span>
+                    {{ trail.distance }}
+                  </span>
+                  <span class="trail-stat">
+                    <span class="material-icons">schedule</span>
+                    {{ trail.duration }}
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

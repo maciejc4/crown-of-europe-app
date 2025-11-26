@@ -1,0 +1,218 @@
+/* Mountain-themed color palette - Light Mode */
+:root {
+  --color-primary: #2d5038;
+  --color-primary-dark: #1e3626;
+  --color-primary-light: #4a7c5c;
+  --color-accent-green: #4caf50;
+  --color-accent-orange: #ff9800;
+  --color-accent-blue: #64b5f6;
+  --color-snow: #f5f7f5;
+  --color-rock: #8b7355;
+  --color-forest: #228b22;
+  --color-sky: #87ceeb;
+  --color-text: #2c3e2e;
+  --color-text-light: #5a6b5c;
+  --color-white: #ffffff;
+  --color-border: #d4ddd6;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  
+  /* Theme-agnostic variables */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7f5;
+  --bg-tertiary: #e8ebe8;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-tertiary: #9ca3af;
+  --border-color: #e5e7eb;
+  --accent-primary: #10b981;
+  --accent-secondary: #059669;
+  
+  /* Header colors */
+  --header-bg-start: #1a3a2a;
+  --header-bg-mid: #2d5038;
+  --header-bg-end: #3d6848;
+  
+  /* Difficulty colors */
+  --difficulty-easy-bg: #dcfce7;
+  --difficulty-easy-text: #166534;
+  --difficulty-medium-bg: #fef3c7;
+  --difficulty-medium-text: #92400e;
+  --difficulty-hard-bg: #fee2e2;
+  --difficulty-hard-text: #991b1b;
+  
+  /* Status colors */
+  --success-color: #10b981;
+  --success-hover: #059669;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  
+  /* Weather card */
+  --weather-bg-start: #e3f2fd;
+  --weather-bg-end: #bbdefb;
+  --weather-text: #1976d2;
+  --weather-text-dark: #1565c0;
+  
+  /* Mapy.cz color */
+  --mapy-cz-color: #e25822;
+  
+  /* Trail colors */
+  --trail-easy-bg: #e8f5e9;
+  --trail-easy-text: #2e7d32;
+  --trail-medium-bg: #fff3e0;
+  --trail-medium-text: #ef6c00;
+  --trail-hard-bg: #ffebee;
+  --trail-hard-text: #c62828;
+  
+  /* Footer */
+  --footer-bg: #1f2937;
+  --footer-text: #9ca3af;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --color-primary: #4a7c5c;
+  --color-primary-dark: #2d5038;
+  --color-primary-light: #6ba37a;
+  --color-snow: #1f2937;
+  --color-text: #e5e7eb;
+  --color-text-light: #9ca3af;
+  --color-white: #111827;
+  --color-border: #374151;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #6b7280;
+  --border-color: #374151;
+  --accent-primary: #34d399;
+  --accent-secondary: #10b981;
+  
+  /* Header colors - darker in dark mode */
+  --header-bg-start: #0f1f17;
+  --header-bg-mid: #1a3a2a;
+  --header-bg-end: #2d5038;
+  
+  /* Difficulty colors - adjusted for dark mode */
+  --difficulty-easy-bg: #065f46;
+  --difficulty-easy-text: #a7f3d0;
+  --difficulty-medium-bg: #78350f;
+  --difficulty-medium-text: #fde68a;
+  --difficulty-hard-bg: #7f1d1d;
+  --difficulty-hard-text: #fecaca;
+  
+  /* Status colors */
+  --success-color: #34d399;
+  --success-hover: #10b981;
+  --error-color: #f87171;
+  --warning-color: #fbbf24;
+  
+  /* Weather card */
+  --weather-bg-start: #1e3a5f;
+  --weather-bg-end: #0f2744;
+  --weather-text: #93c5fd;
+  --weather-text-dark: #bfdbfe;
+  
+  /* Mapy.cz color */
+  --mapy-cz-color: #ff7043;
+  
+  /* Trail colors */
+  --trail-easy-bg: #065f46;
+  --trail-easy-text: #a7f3d0;
+  --trail-medium-bg: #78350f;
+  --trail-medium-text: #fde68a;
+  --trail-hard-bg: #7f1d1d;
+  --trail-hard-text: #fecaca;
+  
+  /* Footer */
+  --footer-bg: #0f172a;
+  --footer-text: #6b7280;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-secondary);
+  min-height: 100vh;
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #fff3e0 100%);
+}
+
+[data-theme="dark"] body {
+  background: #0f172a;
+}
+
+/* Mountain silhouette background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%232d503815' d='M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+[data-theme="dark"] body::before {
+  opacity: 0.15;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}

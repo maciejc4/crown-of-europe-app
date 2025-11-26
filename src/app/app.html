@@ -1,0 +1,273 @@
+<div class="app-container">
+  <!-- Notification -->
+  @if (notification()) {
+    <div class="notification" [class]="notification()!.type">
+      <span class="material-icons">{{ notification()!.type === 'success' ? 'check_circle' : 'error' }}</span>
+      {{ notification()!.message }}
+    </div>
+  }
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-bg"></div>
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <span class="material-icons">terrain</span>
+        </div>
+        <div class="logo-text">
+          <h1>Crown of Europe</h1>
+          <p class="tagline">Conquer the highest peaks of every European country</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="header-btn" (click)="openStatistics()" title="Statistics">
+          <span class="material-icons">analytics</span>
+        </button>
+        <button class="header-btn" (click)="toggleTheme()" title="Toggle theme">
+          <span class="material-icons">{{ theme() === 'dark' ? 'light_mode' : 'dark_mode' }}</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats Bar -->
+  <section class="stats-bar">
+    <div class="stats-container">
+      <div class="stat-item clickable" (click)="openStatistics()">
+        <div class="stat-icon climbed-icon">
+          <span class="material-icons">flag</span>
+        </div>
+        <div class="stat-content">
+          <span class="stat-number">{{ climbedMountains().length }}</span>
+          <span class="stat-label">Climbed</span>
+        </div>
+      </div>
+      
+      <div class="stat-item progress-item clickable" (click)="openStatistics()">
+        <div class="progress-ring">
+          <svg viewBox="0 0 36 36">
+            <path class="progress-bg"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="progress-fill"
+              [attr.stroke-dasharray]="getProgressPercentage() + ', 100'"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          </svg>
+          <span class="progress-value">{{ getProgressPercentage() }}%</span>
+        </div>
+        <span class="stat-label">Progress</span>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon remaining-icon">
+          <span class="material-icons">explore</span>
+        </div>
+        <div class="stat-content">
+          <span class="stat-number">{{ totalMountains() - climbedMountains().length }}</span>
+          <span class="stat-label">Remaining</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Ad Placeholder -->
+    <aside class="ad-container">
+      <div class="ad-placeholder">
+        <div class="ad-content">
+          <span class="material-icons">ads_click</span>
+          <div class="ad-text">
+            <span class="ad-title">Ad Space</span>
+            <span class="ad-subtitle">Google AdWords</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="table-card">
+      <div class="table-toolbar">
+        <div class="toolbar-left">
+          <h2>
+            <span class="material-icons">list</span>
+            Peak List
+          </h2>
+        </div>
+        
+        <div class="toolbar-right">
+          <!-- Search Box -->
+          <div class="search-box">
+            <span class="material-icons search-icon">search</span>
+            <input 
+              type="text" 
+              placeholder="Search peak, region, country..."
+              [value]="searchQuery()"
+              (input)="onSearchChange($event)"
+              class="search-input"
+            >
+            @if (searchQuery()) {
+              <button class="clear-search" (click)="clearSearch()">
+                <span class="material-icons">close</span>
+              </button>
+            }
+          </div>
+          
+          <span class="results-count">
+            {{ filteredMountains().length }} of {{ totalMountains() }}
+          </span>
+        </div>
+      </div>
+      
+      <div class="table-container">
+        <table class="mountains-table">
+          <thead>
+            <tr>
+              <th class="checkbox-col">
+                <button class="sort-btn" (click)="sort('climbed')" [class.active]="sortColumn() === 'climbed'">
+                  <span class="material-icons">check_circle</span>
+                  <span class="material-icons sort-icon">{{ getSortIcon('climbed') }}</span>
+                </button>
+              </th>
+              <th>
+                <button class="sort-btn" (click)="sort('name')" [class.active]="sortColumn() === 'name'">
+                  Name
+                  <span class="material-icons sort-icon">{{ getSortIcon('name') }}</span>
+                </button>
+              </th>
+              <th>
+                <button class="sort-btn" (click)="sort('height')" [class.active]="sortColumn() === 'height'">
+                  Height
+                  <span class="material-icons sort-icon">{{ getSortIcon('height') }}</span>
+                </button>
+              </th>
+              <th>
+                <button class="sort-btn" (click)="sort('country')" [class.active]="sortColumn() === 'country'">
+                  Country
+                  <span class="material-icons sort-icon">{{ getSortIcon('country') }}</span>
+                </button>
+              </th>
+              <th>
+                <button class="sort-btn" (click)="sort('region')" [class.active]="sortColumn() === 'region'">
+                  Region
+                  <span class="material-icons sort-icon">{{ getSortIcon('region') }}</span>
+                </button>
+              </th>
+              <th>
+                <button class="sort-btn" (click)="sort('difficulty')" [class.active]="sortColumn() === 'difficulty'">
+                  Difficulty
+                  <span class="material-icons sort-icon">{{ getSortIcon('difficulty') }}</span>
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (mountain of filteredMountains(); track mountain.id) {
+              <tr 
+                [class.climbed-row]="mountain.climbed"
+                (click)="openMountainDetails(mountain)"
+                class="clickable-row"
+              >
+                <td class="checkbox-col">
+                  <label class="checkbox-container" (click)="$event.stopPropagation()">
+                    <input 
+                      type="checkbox" 
+                      [checked]="mountain.climbed"
+                      (change)="toggleClimbed(mountain.id, $event)"
+                    >
+                    <span class="checkmark">
+                      <span class="material-icons check-icon">check</span>
+                    </span>
+                  </label>
+                </td>
+                <td class="name-col">
+                  <div class="mountain-name-cell">
+                    <span class="mountain-name">{{ mountain.name }}</span>
+                    <span class="view-hint">
+                      <span class="material-icons">open_in_new</span>
+                    </span>
+                  </div>
+                </td>
+                <td class="height-col">
+                  <span class="height-value">{{ mountain.height }}</span>
+                  <span class="height-unit">m</span>
+                </td>
+                <td class="country-col">{{ mountain.country }}</td>
+                <td class="region-col">{{ mountain.region }}</td>
+                <td class="difficulty-col">
+                  <span class="difficulty-badge" [class]="getDifficultyClass(mountain.difficulty)">
+                    {{ mountain.difficulty }}
+                  </span>
+                </td>
+              </tr>
+            }
+            @empty {
+              <tr class="empty-row">
+                <td colspan="6">
+                  <div class="empty-state">
+                    <span class="material-icons">search_off</span>
+                    <p>No results for "{{ searchQuery() }}"</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Actions Section -->
+    <div class="actions-section">
+      <div class="actions-grid">
+        <button class="action-button primary" (click)="generatePdf()">
+          <span class="material-icons">picture_as_pdf</span>
+          <span class="btn-text">Generate PDF</span>
+        </button>
+        
+        <button class="action-button secondary" (click)="openStatistics()">
+          <span class="material-icons">analytics</span>
+          <span class="btn-text">Statistics</span>
+        </button>
+        
+        <button class="action-button secondary" (click)="exportData()">
+          <span class="material-icons">download</span>
+          <span class="btn-text">Export</span>
+        </button>
+        
+        <label class="action-button secondary file-input-label">
+          <span class="material-icons">upload</span>
+          <span class="btn-text">Import</span>
+          <input type="file" accept=".json" (change)="importData($event)" hidden>
+        </label>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="material-icons">terrain</span>
+        <span>Crown of Europe</span>
+      </div>
+      <div class="footer-links">
+        <span>© 2025</span>
+        <span class="separator">•</span>
+        <span>All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Mountain Details Modal -->
+@if (selectedMountain()) {
+  <app-mountain-modal
+    [mountain]="selectedMountain()!"
+    (close)="closeMountainDetails()"
+    (toggleClimbed)="onModalToggleClimbed($event)"
+  />
+}
+
+<!-- Statistics Modal -->
+@if (showStatistics()) {
+  <app-statistics (close)="closeStatistics()" />
+}
