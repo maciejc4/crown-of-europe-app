@@ -42,6 +42,7 @@ export class App {
       m.name.toLowerCase().includes(query) ||
       m.region.toLowerCase().includes(query) ||
       m.country.toLowerCase().includes(query) ||
+      m.geoZone.toLowerCase().includes(query) ||
       m.difficulty.toLowerCase().includes(query) ||
       m.height.toString().includes(query)
     );

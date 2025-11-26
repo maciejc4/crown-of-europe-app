@@ -592,6 +592,103 @@ tr:hover .view-hint {
   color: var(--text-secondary);
 }
 
+/* Zone Badge */
+.zone-col {
+  white-space: nowrap;
+}
+
+.zone-badge {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.zone-badge[data-zone="Western Alps"] {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.zone-badge[data-zone="Eastern Alps"] {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.zone-badge[data-zone="Scandinavia"] {
+  background: #cffafe;
+  color: #0e7490;
+}
+
+.zone-badge[data-zone="British Isles"] {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.zone-badge[data-zone="Iberian Peninsula"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.zone-badge[data-zone="Balkans"] {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+.zone-badge[data-zone="Carpathians"] {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+.zone-badge[data-zone="Central Europe"] {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+:root[data-theme="dark"] {
+  .zone-badge[data-zone="Western Alps"] {
+    background: #1e3a5f;
+    color: #93c5fd;
+  }
+
+  .zone-badge[data-zone="Eastern Alps"] {
+    background: #312e81;
+    color: #a5b4fc;
+  }
+
+  .zone-badge[data-zone="Scandinavia"] {
+    background: #164e63;
+    color: #67e8f9;
+  }
+
+  .zone-badge[data-zone="British Isles"] {
+    background: #14532d;
+    color: #86efac;
+  }
+
+  .zone-badge[data-zone="Iberian Peninsula"] {
+    background: #78350f;
+    color: #fcd34d;
+  }
+
+  .zone-badge[data-zone="Balkans"] {
+    background: #831843;
+    color: #f9a8d4;
+  }
+
+  .zone-badge[data-zone="Carpathians"] {
+    background: #581c87;
+    color: #d8b4fe;
+  }
+
+  .zone-badge[data-zone="Central Europe"] {
+    background: #7c2d12;
+    color: #fdba74;
+  }
+}
+
 /* Difficulty Badge */
 .difficulty-badge {
   display: inline-block;

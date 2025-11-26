@@ -39,6 +39,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 4808,
     region: 'French Alps',
     country: 'France/Italy',
+    geoZone: 'Western Alps',
     difficulty: 'hard',
     climbed: false,
     details: {
@@ -60,6 +61,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 4478,
     region: 'Pennine Alps',
     country: 'Switzerland/Italy',
+    geoZone: 'Western Alps',
     difficulty: 'hard',
     climbed: false,
     details: {
@@ -81,6 +83,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 4634,
     region: 'Pennine Alps',
     country: 'Switzerland',
+    geoZone: 'Western Alps',
     difficulty: 'hard',
     climbed: false,
     details: {
@@ -101,6 +104,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 3798,
     region: 'Hohe Tauern',
     country: 'Austria',
+    geoZone: 'Eastern Alps',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -122,6 +126,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2962,
     region: 'Bavarian Alps',
     country: 'Germany',
+    geoZone: 'Eastern Alps',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -143,6 +148,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2864,
     region: 'Julian Alps',
     country: 'Slovenia',
+    geoZone: 'Eastern Alps',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -164,6 +170,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2655,
     region: 'High Tatras',
     country: 'Slovakia',
+    geoZone: 'Carpathians',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -184,6 +191,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2499,
     region: 'High Tatras',
     country: 'Poland/Slovakia',
+    geoZone: 'Carpathians',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -204,6 +212,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2925,
     region: 'Rila Mountains',
     country: 'Bulgaria',
+    geoZone: 'Balkans',
     difficulty: 'easy',
     climbed: false,
     details: {
@@ -225,6 +234,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2918,
     region: 'Olympus Range',
     country: 'Greece',
+    geoZone: 'Balkans',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -246,6 +256,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2469,
     region: 'Jotunheimen',
     country: 'Norway',
+    geoZone: 'Scandinavia',
     difficulty: 'easy',
     climbed: false,
     details: {
@@ -267,6 +278,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2097,
     region: 'Scandinavian Mountains',
     country: 'Sweden',
+    geoZone: 'Scandinavia',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -287,6 +299,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 3479,
     region: 'Sierra Nevada',
     country: 'Spain',
+    geoZone: 'Iberian Peninsula',
     difficulty: 'easy',
     climbed: false,
     details: {
@@ -308,6 +321,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 3404,
     region: 'Pyrenees',
     country: 'Spain',
+    geoZone: 'Iberian Peninsula',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -329,6 +343,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 3357,
     region: 'Sicily',
     country: 'Italy',
+    geoZone: 'Western Alps',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -350,6 +365,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2912,
     region: 'Gran Sasso',
     country: 'Italy',
+    geoZone: 'Western Alps',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -371,6 +387,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2544,
     region: 'Făgăraș Mountains',
     country: 'Romania',
+    geoZone: 'Carpathians',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -392,6 +409,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 1603,
     region: 'Krkonoše',
     country: 'Czechia/Poland',
+    geoZone: 'Central Europe',
     difficulty: 'easy',
     climbed: false,
     details: {
@@ -413,6 +431,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 1038,
     region: 'MacGillycuddy\'s Reeks',
     country: 'Ireland',
+    geoZone: 'British Isles',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -434,6 +453,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 1345,
     region: 'Grampian Mountains',
     country: 'Scotland',
+    geoZone: 'British Isles',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -455,6 +475,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 1085,
     region: 'Snowdonia',
     country: 'Wales',
+    geoZone: 'British Isles',
     difficulty: 'easy',
     climbed: false,
     details: {
@@ -477,6 +498,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2061,
     region: 'Carpathians',
     country: 'Ukraine',
+    geoZone: 'Carpathians',
     difficulty: 'easy',
     climbed: false,
     details: {
@@ -498,6 +520,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2523,
     region: 'Durmitor',
     country: 'Montenegro',
+    geoZone: 'Balkans',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -518,6 +541,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2764,
     region: 'Korab Range',
     country: 'North Macedonia/Albania',
+    geoZone: 'Balkans',
     difficulty: 'medium',
     climbed: false,
     details: {
@@ -538,6 +562,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 2694,
     region: 'Albanian Alps',
     country: 'Albania',
+    geoZone: 'Balkans',
     difficulty: 'hard',
     climbed: false,
     details: {
@@ -558,6 +583,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 3967,
     region: 'Bernese Alps',
     country: 'Switzerland',
+    geoZone: 'Western Alps',
     difficulty: 'hard',
     climbed: false,
     details: {
@@ -579,6 +605,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 4158,
     region: 'Bernese Alps',
     country: 'Switzerland',
+    geoZone: 'Western Alps',
     difficulty: 'hard',
     climbed: false,
     details: {
@@ -599,6 +626,7 @@ export const CROWN_OF_EUROPE: Mountain[] = [
     height: 1831,
     region: 'Dinaric Alps',
     country: 'Croatia',
+    geoZone: 'Balkans',
     difficulty: 'medium',
     climbed: false,
     details: {

@@ -153,6 +153,12 @@
                 </button>
               </th>
               <th>
+                <button class="sort-btn" (click)="sort('geoZone')" [class.active]="sortColumn() === 'geoZone'">
+                  Zone
+                  <span class="material-icons sort-icon">{{ getSortIcon('geoZone') }}</span>
+                </button>
+              </th>
+              <th>
                 <button class="sort-btn" (click)="sort('difficulty')" [class.active]="sortColumn() === 'difficulty'">
                   Difficulty
                   <span class="material-icons sort-icon">{{ getSortIcon('difficulty') }}</span>
@@ -193,6 +199,11 @@
                 </td>
                 <td class="country-col">{{ mountain.country }}</td>
                 <td class="region-col">{{ mountain.region }}</td>
+                <td class="zone-col">
+                  <span class="zone-badge" [attr.data-zone]="mountain.geoZone">
+                    {{ mountain.geoZone }}
+                  </span>
+                </td>
                 <td class="difficulty-col">
                   <span class="difficulty-badge" [class]="getDifficultyClass(mountain.difficulty)">
                     {{ mountain.difficulty }}
@@ -202,7 +213,7 @@
             }
             @empty {
               <tr class="empty-row">
-                <td colspan="6">
+                <td colspan="7">
                   <div class="empty-state">
                     <span class="material-icons">search_off</span>
                     <p>No results for "{{ searchQuery() }}"</p>
