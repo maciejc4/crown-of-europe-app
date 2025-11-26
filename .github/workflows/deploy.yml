@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: npm run build -- --base-href /korona-gor-polskich-app/
+        run: npm run build -- --base-href /crown-of-europe-app/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -39,7 +39,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/korona-gor-polskich-app/browser'
+          path: './dist/crown-of-europe-app/browser'
 
   deploy:
     environment:
